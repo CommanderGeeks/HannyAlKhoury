@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanny Al Khoury - Palestinian Artist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-red: #c41e3a;
+            --primary-green: #006233;
+            --primary-white: #ffffff;
+            --text-light: #f5f5f5;
+            --text-gray: #888;
+            --border-color: #333;
+            --hover-overlay: rgba(196, 30, 58, 0.9);
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s;
+        }
+
+        .loader-text {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 0.1rem;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(196, 30, 58, 0.1));
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            animation: fadeInUp 1.5s;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 300;
+            letter-spacing: 0.3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--text-light), var(--primary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            letter-spacing: 0.2rem;
+        }
+
+        .hero-quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: transparent;
+            border: 1px solid var(--text-light);
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s;
+            letter-spacing: 0.1rem;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-red);
+            border-color: var(--primary-red);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: rgba(245, 245, 245, 0.9);
+        }
+
+        .timeline {
+            margin-top: 3rem;
+        }
+
+        .timeline-item {
+            border-left: 2px solid var(--primary-red);
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-red);
+            border-radius: 50%;
+        }
+
+        .timeline-year {
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Collections Grid */
+        .collections {
+            padding: 5rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .collections h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .collection-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collection-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-green));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .collection-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .collection-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .collection-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .collection-count {
+            color: var(--primary-red);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .collection-description {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Collection Detail Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            max-width: 1400px;
+            margin: 5rem auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .close-modal {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            font-size: 2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            z-index: 2001;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--text-light);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .collection-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .collection-header h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .collection-intro {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            color: rgba(245, 245, 245, 0.9);
+        }
+
+        .artworks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .artwork-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .artwork-card:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-red);
+        }
+
+        .artwork-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .artwork-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .artwork-info {
+            padding: 1.5rem;
+        }
+
+        .artwork-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .artwork-details {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .artwork-details span {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .artwork-price {
+            color: var(--primary-red);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.1), rgba(0, 98, 51, 0.1));
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            font-size: 1.1rem;
+            line-height: 2;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info a {
+            color: var(--primary-red);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .artworks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Artwork Detail Overlay */
+        .artwork-detail-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+
+        .artwork-detail-content {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .artwork-detail-image {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .artwork-detail-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .artwork-detail-info {
+            flex: 1;
+        }
+
+        .artwork-detail-info h4 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-label {
+            color: var(--text-gray);
+        }
+
+        .detail-value {
+            color: var(--text-light);
+            text-align: right;
+        }
+
+        .purchase-button {
+            margin-top: 2rem;
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-red);
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .purchase-button:hover {
+            background: #a01729;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-text">HANNY AL KHOURY</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">HK</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>HANNY AL KHOURY</h1>
+            <p class="hero-subtitle">Palestinian Artist • Witness • Survivor</p>
+            <p class="hero-quote">
+                "Life can hit you bad if you have values—pull you right down to the bottom. 
+                But if you continue following your values, it will lift you up."
+            </p>
+            <a href="#collections" class="cta-button">EXPLORE COLLECTIONS</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h2>The Journey</h2>
+                <p>
+                    Born in 1990 in Eilabun, the only Palestinian village whose people were allowed to return after the Nakba of 1948, 
+                    Hanny Al Khoury's art is inseparable from his identity as a Palestinian. His journey from homelessness in Jerusalem 
+                    to international recognition is a testament to the power of resilience and artistic vision.
+                </p>
+                <p>
+                    After immigrating to Canada in 2017, Al Khoury found the space to process his trauma and transform it into powerful 
+                    visual narratives. His work has been exhibited at Banksy's Walled Off Hotel, the Art Gallery of Alberta, and galleries 
+                    across Abu Dhabi, New York, and Paris.
+                </p>
+                <p>
+                    Each painting is a station in his life's journey—capturing broken emotions, misery, and trauma, while simultaneously 
+                    celebrating resistance, hope, and the indomitable human spirit. His 2023 museum exhibition "La La Lands" at the Art 
+                    Gallery of Alberta marked his arrival as a major voice in contemporary Palestinian art.
+                </p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">1990</div>
+                    <div>Born in Eilabun, Palestine</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2007-2008</div>
+                    <div>Homeless in Jerusalem, living between Arab and Jewish sectors</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2015</div>
+                    <div>Guinness World Record for largest toast mosaic</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2017</div>
+                    <div>Immigration to Canada, beginning of artistic breakthrough</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2019</div>
+                    <div>"Chaos of the Senses" at Banksy's Walled Off Hotel</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <div>"La La Lands" museum exhibition at Art Gallery of Alberta</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div>Preparing studio move from Canada to Dubai</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section class="collections" id="collections">
+        <h2>COLLECTIONS</h2>
+        <div class="collections-grid" id="collectionsGrid"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>Connect</h2>
+        <div class="contact-info">
+            <p>Website: <a href="https://www.hannykhoury.com" target="_blank">www.hannykhoury.com</a></p>
+            <p>Instagram: <a href="https://instagram.com/hanny_al_khoury" target="_blank">@hanny_al_khoury</a></p>
+            <p>Email: <a href="mailto:management@hkstudio.art">management@hkstudio.art</a></p>
+            <p>WhatsApp: +1 587 930 1274</p>
+        </div>
+        <p style="margin-top: 3rem; color: var(--text-gray);">
+            Studio transitioning from Edmonton, Canada to Dubai, UAE
+        </p>
+    </section>
+
+    <!-- Modal for Collection Details -->
+    <div class="modal" id="collectionModal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <div class="collection-header">
+                <h3 id="modalCollectionTitle"></h3>
+                <p class="collection-intro" id="modalCollectionDescription"></p>
+            </div>
+            <div class="artworks-grid" id="modalArtworksGrid"></div>
+        </div>
+    </div>
+
+    <!-- Artwork Detail Overlay -->
+    <div class="artwork-detail-overlay" id="artworkDetailOverlay">
+        <span class="close-modal" onclick="closeArtworkDetail()">&times;</span>
+        <div class="artwork-detail-content">
+            <div class="artwork-detail-image">
+                <img id="detailImage" src="" alt="">
+            </div>
+            <div class="artwork-detail-info">
+                <h4 id="detailTitle"></h4>
+                <div class="detail-row">
+                    <span class="detail-label">Year</span>
+                    <span class="detail-value" id="detailYear"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Medium</span>
+                    <span class="detail-value" id="detailMedium"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Dimensions</span>
+                    <span class="detail-value" id="detailDimensions"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Price</span>
+                    <span class="detail-value" id="detailPrice"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Collection</span>
+                    <span class="detail-value" id="detailCollection"></span>
+                </div>
+                <button class="purchase-button" onclick="inquireAboutPurchase()">Inquire About This Piece</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Artwork database from Excel
+        const artworkDatabase = {
+            1: {name: "Observant", year: 2022, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            2: {name: "Bomb 1", year: 2024, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            3: {name: "Bomb 2", year: 2024, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            4: {name: "Bomb 3", year: 2024, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            5: {name: "Simplism", year: 2023, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            6: {name: "The Conclusion", year: 2022, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 17000},
+            7: {name: "I see you", year: 2023, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            8: {name: "Bomb", year: 2022, medium: "Oil on wood", length: "40\"", width: "30\"", price: 17000},
+            9: {name: "Both Ways", year: 2022, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 18000},
+            10: {name: "Revenge", year: 2022, medium: "Oil on canvas", length: "48\"", width: "48\"", price: 40000},
+            11: {name: "Awakening", year: 2022, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 18000},
+            12: {name: "Rebel", year: 2022, medium: "Oil on canvas", length: "48\"", width: "60\"", price: 50000},
+            13: {name: "New Beginning", year: 2022, medium: "Oil on canvas", length: "48\"", width: "36\"", price: 30000},
+            14: {name: "transcendence", year: 2023, medium: "Oil on canvas", length: "60\"", width: "48\"", price: 35000},
+            15: {name: "relationship", year: 2023, medium: "Oil on canvas", length: "36\"", width: "48\"", price: 30000},
+            16: {name: "Fire&flower", year: 2023, medium: "Oil on canvas", length: "60\"", width: "40\"", price: 35000},
+            17: {name: "about us", year: 2023, medium: "Oil on canvas", length: "48\"", width: "36\"", price: 30000},
+            18: {name: "circus", year: 2021, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 18000},
+            19: {name: "Apartheid", year: 2021, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 18000},
+            20: {name: "steps", year: 2021, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 18000},
+            21: {name: "Neighbourhood", year: 2021, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 18000},
+            22: {name: "icon", year: 2021, medium: "Oil on canvas", length: "24\"", width: "30\"", price: 13000},
+            23: {name: "A dream 1", year: 2021, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 18000},
+            24: {name: "A pray", year: 2021, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 18000},
+            25: {name: "Relationship", year: 2024, medium: "Oil on canvas", length: "40\"", width: "40\"", price: 28000},
+            26: {name: "Compassion", year: 2024, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 19000},
+            27: {name: "Dimension", year: 2024, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 19000},
+            28: {name: "Feminism", year: 2025, medium: "Oil on canvas", length: "48\"", width: "60\"", price: 52000},
+            29: {name: "Bella", year: 2022, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 18000},
+            30: {name: "experiment", year: 2023, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 18000},
+            31: {name: "Silence", year: 2023, medium: "Oil on canvas", length: "48\"", width: "60\"", price: 50000},
+            32: {name: "Anticipations", year: 2022, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 18000},
+            33: {name: "Treatment case", year: 2018, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 18000},
+            34: {name: "Surveillor", year: 2022, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 18000},
+            35: {name: "Cure", year: 2022, medium: "Oil on canvas", length: "48\"", width: "36\"", price: 30000},
+            36: {name: "chalice 2", year: 2023, medium: "Oil on canvas", length: "48\"", width: "36\"", price: 30000},
+            37: {name: "tree 2", year: 2023, medium: "Oil on canvas", length: "60\"", width: "40\"", price: 35000},
+            38: {name: "Moving Forward", year: 2023, medium: "Oil on canvas", length: "60\"", width: "48\"", price: 50000},
+            39: {name: "Birthday", year: 2023, medium: "Oil on canvas", length: "60\"", width: "48\"", price: 50000},
+            40: {name: "Dimensional", year: 2023, medium: "Oil on canvas", length: "48\"", width: "60\"", price: 50000},
+            41: {name: "Break Through", year: 2023, medium: "Oil on canvas", length: "60\"", width: "72\"", price: 65000},
+            42: {name: "Landscape", year: 2023, medium: "Oil on canvas", length: "48\"", width: "60\"", price: 50000},
+            43: {name: "Reconnect", year: 2023, medium: "Oil on canvas", length: "72\"", width: "60\"", price: 65000},
+            44: {name: "Imperialism 3", year: 2023, medium: "Oil on canvas", length: "60\"", width: "48\"", price: 45000},
+            45: {name: "Establishment", year: 2023, medium: "Oil on canvas", length: "72\"", width: "60\"", price: 65000},
+            46: {name: "Imperialism 4", year: 2023, medium: "Oil on canvas", length: "72\"", width: "60\"", price: 65000},
+            47: {name: "Imperialism 2", year: 2023, medium: "Oil on canvas", length: "60\"", width: "48\"", price: 45000},
+            48: {name: "Definitely", year: 2019, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 15000},
+            49: {name: "Jerusalem", year: 2019, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 15000},
+            50: {name: "Connection", year: 2023, medium: "Oil on canvas", length: "72\"", width: "60\"", price: 65000},
+            51: {name: "Vision", year: 2019, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 15000},
+            52: {name: "Observer", year: 2022, medium: "Oil on canvas", length: "60\"", width: "48\"", price: 45000},
+            53: {name: "tank", year: 2023, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            54: {name: "Connection2", year: 2023, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            55: {name: "palestine5", year: 2023, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            56: {name: "palestine4", year: 2023, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            57: {name: "palestine3", year: 2023, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            58: {name: "palestine6", year: 2023, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            59: {name: "palestine2", year: 2023, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            60: {name: "palestine1", year: 2023, medium: "Oil on paper", length: "30\"", width: "22\"", price: 6000},
+            61: {name: "Hypothetically", year: 2021, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 15000},
+            62: {name: "non of us", year: 2021, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 15000},
+            63: {name: "Untitled", year: 2020, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 12000},
+            64: {name: "When", year: 2020, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 12000},
+            65: {name: "Release", year: 2020, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 12000},
+            66: {name: "Faker", year: 2019, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 12000},
+            67: {name: "Untitled", year: 2020, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 12000},
+            68: {name: "Schizophernia", year: 2018, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 12000},
+            69: {name: "Chair Confession", year: 2019, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 12000},
+            70: {name: "Orphan", year: 2019, medium: "Oil on canvas", length: "30\"", width: "40\"", price: 12000},
+            71: {name: "Fire Clown", year: 2021, medium: "Oil on canvas", length: "40\"", width: "30\"", price: 15000},
+            72: {name: "chalice 1", year: 2023, medium: "Oil on canvas", length: "48\"", width: "36\"", price: 30000},
+            73: {name: "function", year: 2023, medium: "Oil on canvas", length: "60\"", width: "72\"", price: 65000},
+            74: {name: "Organized chaos", year: 2024, medium: "Oil on canvas", length: "72\"", width: "60\"", price: 65000},
+            75: {name: "Absorb exost", year: 2025, medium: "Oil on canvas", length: "60\"", width: "48\"", price: 50000},
+            76: {name: "Distractio", year: 2025, medium: "Oil on canvas", length: "48\"", width: "60\"", price: 50000},
+            77: {name: "Direction", year: 2025, medium: "Oil on canvas", length: "60\"", width: "48\"", price: 50000},
+            78: {name: "Erasure", year: "N/A", medium: "Oil on canvas", length: "48\"", width: "60\"", price: 45000},
+            79: {name: "tree 1", year: 2023, medium: "Oil on canvas", length: "60\"", width: "40\"", price: 35000},
+            80: {name: "prayers", year: 2023, medium: "Oil on canvas", length: "48\"", width: "36\"", price: 30000}
+        };
+
+        // Collections data
+        const collections = [
+            {
+                title: "The Bombs Series",
+                count: 4,
+                description: "Explosive visual metaphors confronting violence and destruction",
+                artworks: [8, 2, 3, 4],
+                fullDescription: "This powerful series confronts the violence and destruction that has shaped Palestinian existence. Created between 2022-2024, these works employ explosive visual metaphors to address the ongoing conflict and its psychological impact on civilian populations."
+            },
+            {
+                title: "Palestine Identity Series",
+                count: 8,
+                description: "Visual manifesto of Palestinian identity and resistance",
+                artworks: [60, 59, 57, 56, 55, 58, 49, 53],
+                fullDescription: "This collection serves as a visual manifesto of Palestinian identity and resistance. Created primarily in 2023, these works directly engage with questions of nationhood, displacement, and cultural preservation."
+            },
+            {
+                title: "Imperialism Chronicles",
+                count: 4,
+                description: "Critical examination of power, colonization, and structural oppression",
+                artworks: [47, 44, 46, 19],
+                fullDescription: "These works critically examine systems of power, colonization, and structural oppression. Al Khoury draws parallels between various forms of imperialism throughout history and contemporary Palestinian experiences."
+            },
+            {
+                title: "Chaos of the Senses",
+                count: 7,
+                description: "Exploring perception and consciousness in contexts of conflict",
+                artworks: [1, 7, 52, 51, 34, 11, 6],
+                fullDescription: "Originally exhibited at Banksy's Walled Off Hotel in Bethlehem (2019), this introspective collection marked a pivotal moment in Al Khoury's career. These works explore perception, consciousness, and the act of witnessing in contexts of conflict."
+            },
+            {
+                title: "Relationships & Human Connection",
+                count: 8,
+                description: "Celebrating human bonds persisting despite conflict",
+                artworks: [15, 25, 50, 54, 17, 9, 26, 29],
+                fullDescription: "This tender collection explores human bonds persisting despite conflict and displacement. These works celebrate love, friendship, and community as acts of resistance against dehumanization."
+            },
+            {
+                title: "Psychological Landscapes",
+                count: 8,
+                description: "Personal journey through trauma, mental health, and healing",
+                artworks: [68, 33, 35, 31, 32, 65, 69, 66],
+                fullDescription: "These deeply personal works explore mental health, trauma, and healing within the context of political oppression. Created across multiple years, they document Al Khoury's own journey through homelessness, displacement, and recovery."
+            },
+            {
+                title: "Existential Inquiries",
+                count: 9,
+                description: "Philosophical explorations of existence, reality, and possibility",
+                artworks: [64, 61, 48, 62, 5, 14, 41, 27, 40],
+                fullDescription: "This philosophical collection grapples with questions of existence, reality, and possibility. Created during periods of transition and uncertainty, these works explore alternate realities and hypothetical futures."
+            },
+            {
+                title: "Movement & Journey",
+                count: 6,
+                description: "Themes of progression, resistance, and transformation",
+                artworks: [38, 20, 77, 13, 10, 12],
+                fullDescription: "This dynamic collection captures themes of progression, resistance, and transformation. Each piece represents different stages of personal and collective journeys—from rebellion and revenge to new beginnings and forward movement."
+            },
+            {
+                title: "Cultural Narratives",
+                count: 8,
+                description: "Social commentary through metaphor and symbolism",
+                artworks: [18, 71, 39, 22, 70, 21, 45, 28],
+                fullDescription: "These works engage with social and cultural themes, using metaphor and symbolism to comment on societal structures. The circus and clown imagery speaks to the performative aspects of life under occupation."
+            },
+            {
+                title: "Nature & Organic Forms",
+                count: 4,
+                description: "Natural imagery exploring rootedness, growth, and resilience",
+                artworks: [79, 37, 16, 42],
+                fullDescription: "This collection uses natural imagery to explore themes of rootedness, growth, and resilience. Trees become metaphors for Palestinian attachment to land, while flowers represent hope amid destruction."
+            },
+            {
+                title: "Spiritual Dimensions",
+                count: 4,
+                description: "Faith, ritual, and spiritual seeking in times of crisis",
+                artworks: [80, 24, 72, 36],
+                fullDescription: "Drawing from Al Khoury's Christian Palestinian heritage, these works explore faith, ritual, and spiritual seeking in times of crisis. The chalice imagery connects to communion and sacrifice."
+            },
+            {
+                title: "Abstract Expressions",
+                count: 7,
+                description: "Pure form and color capturing emotional states",
+                artworks: [73, 74, 75, 76, 78, 30, 43],
+                fullDescription: "These abstract works represent Al Khoury's exploration of pure form, color, and composition. Moving beyond representational constraints, they capture emotional states and conceptual ideas through gestural marks and color relationships."
+            },
+            {
+                title: "Dreams & Imagination",
+                count: 3,
+                description: "Exploring dreams, possibilities, and imagined futures",
+                artworks: [23, 63, 67],
+                fullDescription: "This collection explores the realm of dreams, possibilities, and imagined futures. Created during periods of uncertainty, these works offer escape from immediate realities while maintaining connection to deeper truths."
+            }
+        ];
+
+        // Initialize the page
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 1000);
+            }, 1500);
+
+            renderCollections();
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Render collections grid
+        function renderCollections() {
+            const grid = document.getElementById('collectionsGrid');
+            collections.forEach((collection, index) => {
+                const card = document.createElement('div');
+                card.className = 'collection-card';
+                card.innerHTML = `
+                    <h3 class="collection-title">${collection.title}</h3>
+                    <p class="collection-count">${collection.count} works</p>
+                    <p class="collection-description">${collection.description}</p>
+                `;
+                card.onclick = () => openCollection(index);
+                grid.appendChild(card);
+            });
+        }
+
+        // Open collection modal
+        function openCollection(index) {
+            const collection = collections[index];
+            const modal = document.getElementById('collectionModal');
+            const title = document.getElementById('modalCollectionTitle');
+            const description = document.getElementById('modalCollectionDescription');
+            const grid = document.getElementById('modalArtworksGrid');
+
+            title.textContent = collection.title;
+            description.textContent = collection.fullDescription;
+            
+            // Clear and populate artworks grid
+            grid.innerHTML = '';
+            collection.artworks.forEach(id => {
+                const artwork = artworkDatabase[id];
+                const card = document.createElement('div');
+                card.className = 'artwork-card';
+                card.innerHTML = `
+                    <div class="artwork-image">
+                        <img src="${id}. ${artwork.name}.jpg" 
+                             alt="${artwork.name}" 
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\"padding: 2rem; text-align: center;\\">Image: ${id}. ${artwork.name}.jpg</div>'">
+                    </div>
+                    <div class="artwork-info">
+                        <h4 class="artwork-title">${artwork.name}</h4>
+                        <div class="artwork-details">
+                            <span>Year: ${artwork.year}</span>
+                            <span>Medium: ${artwork.medium}</span>
+                            <span>Size: ${artwork.length} × ${artwork.width}</span>
+                        </div>
+                        <div class="artwork-price">$${artwork.price.toLocaleString()}</div>
+                    </div>
+                `;
+                card.onclick = () => openArtworkDetail(id, collection.title);
+                grid.appendChild(card);
+            });
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('collectionModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Open artwork detail
+        function openArtworkDetail(id, collectionTitle) {
+            const artwork = artworkDatabase[id];
+            const overlay = document.getElementById('artworkDetailOverlay');
+            
+            document.getElementById('detailImage').src = `${id}. ${artwork.name}.jpg`;
+            document.getElementById('detailImage').alt = artwork.name;
+            document.getElementById('detailTitle').textContent = artwork.name;
+            document.getElementById('detailYear').textContent = artwork.year;
+            document.getElementById('detailMedium').textContent = artwork.medium;
+            document.getElementById('detailDimensions').textContent = `${artwork.length} × ${artwork.width}`;
+            document.getElementById('detailPrice').textContent = `$${artwork.price.toLocaleString()} USD`;
+            document.getElementById('detailCollection').textContent = collectionTitle;
+            
+            overlay.style.display = 'block';
+        }
+
+        // Close artwork detail
+        function closeArtworkDetail() {
+            document.getElementById('artworkDetailOverlay').style.display = 'none';
+        }
+
+        // Inquire about purchase
+        function inquireAboutPurchase() {
+            const title = document.getElementById('detailTitle').textContent;
+            window.location.href = `mailto:management@hkstudio.art?subject=Inquiry about ${title}`;
+        }
+
+        // Close modals on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeArtworkDetail();
+            }
+        });
+
+        // Close modals on background click
+        document.getElementById('collectionModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        document.getElementById('artworkDetailOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeArtworkDetail();
+            }
+        });
+    </script>
+</body>
+</html>
