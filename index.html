@@ -434,6 +434,156 @@
             background: linear-gradient(135deg, rgba(196, 30, 58, 0.1), rgba(0, 98, 51, 0.1));
         }
 
+        /* Inventory Section */
+        .inventory {
+            padding: 5rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .inventory h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+        }
+
+        .inventory-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+        }
+
+        .filter-group select {
+            padding: 0.5rem 1rem;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        .filter-group select:hover {
+            border-color: var(--primary-red);
+        }
+
+        .reset-button {
+            padding: 0.5rem 1.5rem;
+            background: transparent;
+            color: var(--primary-red);
+            border: 1px solid var(--primary-red);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: auto;
+        }
+
+        .reset-button:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        .inventory-stats {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .inventory-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            gap: 1.5rem;
+        }
+
+        .inventory-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-red);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .inventory-thumbnail {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            flex-shrink: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .inventory-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .inventory-details {
+            flex: 1;
+        }
+
+        .inventory-number {
+            font-size: 0.8rem;
+            color: var(--primary-red);
+            margin-bottom: 0.3rem;
+        }
+
+        .inventory-name {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .inventory-info {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .inventory-price {
+            font-size: 1.2rem;
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
         .contact h2 {
             font-size: 3rem;
             margin-bottom: 2rem;
@@ -565,6 +715,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#collections">Collections</a></li>
+                <li><a href="#inventory">Inventory</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -641,6 +792,51 @@
     <section class="collections" id="collections">
         <h2>COLLECTIONS</h2>
         <div class="collections-grid" id="collectionsGrid"></div>
+    </section>
+
+    <!-- Inventory Section -->
+    <section class="inventory" id="inventory">
+        <h2>AVAILABLE WORKS</h2>
+        <div class="inventory-container">
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label>Sort by:</label>
+                    <select id="sortSelect">
+                        <option value="id">Inventory #</option>
+                        <option value="name">Name</option>
+                        <option value="year">Year</option>
+                        <option value="price">Price</option>
+                        <option value="medium">Medium</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Filter Medium:</label>
+                    <select id="mediumFilter">
+                        <option value="all">All Mediums</option>
+                        <option value="Oil on paper">Oil on Paper</option>
+                        <option value="Oil on canvas">Oil on Canvas</option>
+                        <option value="Oil on wood">Oil on Wood</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Price Range:</label>
+                    <select id="priceFilter">
+                        <option value="all">All Prices</option>
+                        <option value="0-10000">Under $10,000</option>
+                        <option value="10000-25000">$10,000 - $25,000</option>
+                        <option value="25000-50000">$25,000 - $50,000</option>
+                        <option value="50000-999999">Over $50,000</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button id="resetFilters" class="reset-button">Reset Filters</button>
+                </div>
+            </div>
+            <div class="inventory-stats">
+                <span id="inventoryCount">Showing 80 works</span>
+            </div>
+            <div class="inventory-grid" id="inventoryGrid"></div>
+        </div>
     </section>
 
     <!-- Contact Section -->
@@ -893,6 +1089,8 @@
             }, 1500);
 
             renderCollections();
+            renderInventory();
+            setupInventoryFilters();
         });
 
         // Smooth scrolling
@@ -996,6 +1194,120 @@
         function inquireAboutPurchase() {
             const title = document.getElementById('detailTitle').textContent;
             window.location.href = `mailto:management@hkstudio.art?subject=Inquiry about ${title}`;
+        }
+
+        // Render inventory
+        function renderInventory() {
+            const grid = document.getElementById('inventoryGrid');
+            const artworksArray = Object.keys(artworkDatabase).map(id => ({
+                ...artworkDatabase[id],
+                id: parseInt(id)
+            }));
+            
+            displayInventoryItems(artworksArray);
+        }
+
+        // Display inventory items
+        function displayInventoryItems(items) {
+            const grid = document.getElementById('inventoryGrid');
+            grid.innerHTML = '';
+            
+            items.forEach(artwork => {
+                const card = document.createElement('div');
+                card.className = 'inventory-card';
+                const imagePath = `Hannys Inventory Images/${artwork.id}_${artwork.name}.jpg`;
+                
+                card.innerHTML = `
+                    <div class="inventory-thumbnail">
+                        <img src="${imagePath.replace(/ /g, '%20')}" 
+                             alt="${artwork.name}">
+                    </div>
+                    <div class="inventory-details">
+                        <div class="inventory-number">#${artwork.id}</div>
+                        <div class="inventory-name">${artwork.name}</div>
+                        <div class="inventory-info">
+                            ${artwork.year} • ${artwork.medium}<br>
+                            ${artwork.length} × ${artwork.width}
+                        </div>
+                        <div class="inventory-price">${artwork.price.toLocaleString('en-US')}</div>
+                    </div>
+                `;
+                
+                card.onclick = () => {
+                    // Find which collection this artwork belongs to
+                    let collectionName = "Individual Work";
+                    collections.forEach(collection => {
+                        if (collection.artworks.includes(artwork.id)) {
+                            collectionName = collection.title;
+                        }
+                    });
+                    openArtworkDetail(artwork.id, collectionName);
+                };
+                
+                grid.appendChild(card);
+            });
+            
+            document.getElementById('inventoryCount').textContent = `Showing ${items.length} works`;
+        }
+
+        // Setup inventory filters
+        function setupInventoryFilters() {
+            const sortSelect = document.getElementById('sortSelect');
+            const mediumFilter = document.getElementById('mediumFilter');
+            const priceFilter = document.getElementById('priceFilter');
+            const resetButton = document.getElementById('resetFilters');
+            
+            function applyFilters() {
+                let artworksArray = Object.keys(artworkDatabase).map(id => ({
+                    ...artworkDatabase[id],
+                    id: parseInt(id)
+                }));
+                
+                // Apply medium filter
+                const selectedMedium = mediumFilter.value;
+                if (selectedMedium !== 'all') {
+                    artworksArray = artworksArray.filter(art => art.medium === selectedMedium);
+                }
+                
+                // Apply price filter
+                const priceRange = priceFilter.value;
+                if (priceRange !== 'all') {
+                    const [min, max] = priceRange.split('-').map(Number);
+                    artworksArray = artworksArray.filter(art => 
+                        art.price >= min && art.price <= max
+                    );
+                }
+                
+                // Apply sorting
+                const sortBy = sortSelect.value;
+                artworksArray.sort((a, b) => {
+                    switch(sortBy) {
+                        case 'name':
+                            return a.name.localeCompare(b.name);
+                        case 'year':
+                            return b.year - a.year;
+                        case 'price':
+                            return a.price - b.price;
+                        case 'medium':
+                            return a.medium.localeCompare(b.medium);
+                        default: // 'id'
+                            return a.id - b.id;
+                    }
+                });
+                
+                displayInventoryItems(artworksArray);
+            }
+            
+            sortSelect.addEventListener('change', applyFilters);
+            mediumFilter.addEventListener('change', applyFilters);
+            priceFilter.addEventListener('change', applyFilters);
+            
+            resetButton.addEventListener('click', () => {
+                sortSelect.value = 'id';
+                mediumFilter.value = 'all';
+                priceFilter.value = 'all';
+                applyFilters();
+            });
         }
 
         // Close modals on escape key
