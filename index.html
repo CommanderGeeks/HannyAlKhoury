@@ -936,9 +936,10 @@
                 const artwork = artworkDatabase[id];
                 const card = document.createElement('div');
                 card.className = 'artwork-card';
+                const imagePath = `Hannys Inventory Images/${id}_${artwork.name}.jpg`;
                 card.innerHTML = `
                     <div class="artwork-image">
-                        <img src="Hannys Inventory Images/${id}_${artwork.name}.jpg" 
+                        <img src="${imagePath.replace(/ /g, '%20')}" 
                              alt="${artwork.name}" 
                              onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\"padding: 2rem; text-align: center;\\">Image: ${id}_${artwork.name}.jpg</div>'">
                     </div>
@@ -971,7 +972,8 @@
             const artwork = artworkDatabase[id];
             const overlay = document.getElementById('artworkDetailOverlay');
             
-            document.getElementById('detailImage').src = `Hannys Inventory Images/${id}_${artwork.name}.jpg`;
+            const imagePath = `Hannys Inventory Images/${id}_${artwork.name}.jpg`;
+            document.getElementById('detailImage').src = imagePath.replace(/ /g, '%20');
             document.getElementById('detailImage').alt = artwork.name;
             document.getElementById('detailTitle').textContent = artwork.name;
             document.getElementById('detailYear').textContent = artwork.year;
