@@ -941,7 +941,7 @@
                     <div class="artwork-image">
                         <img src="${imagePath.replace(/ /g, '%20')}" 
                              alt="${artwork.name}" 
-                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\"padding: 2rem; text-align: center;\\">Image: ${id}_${artwork.name}.jpg</div>'">
+                             onerror="this.style.display='none'">
                     </div>
                     <div class="artwork-info">
                         <h4 class="artwork-title">${artwork.name}</h4>
@@ -950,7 +950,7 @@
                             <span>Medium: ${artwork.medium}</span>
                             <span>Size: ${artwork.length} × ${artwork.width}</span>
                         </div>
-                        <div class="artwork-price">$${artwork.price.toLocaleString()}</div>
+                        <div class="artwork-price">${artwork.price.toLocaleString()}</div>
                     </div>
                 `;
                 card.onclick = () => openArtworkDetail(id, collection.title);
