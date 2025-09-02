@@ -805,7 +805,8 @@
                         <option value="id">Inventory #</option>
                         <option value="name">Name</option>
                         <option value="year">Year</option>
-                        <option value="price">Price</option>
+                        <option value="price-low">Price (Low to High)</option>
+                        <option value="price-high">Price (High to Low)</option>
                         <option value="medium">Medium</option>
                     </select>
                 </div>
@@ -1286,8 +1287,10 @@
                             return a.name.localeCompare(b.name);
                         case 'year':
                             return b.year - a.year;
-                        case 'price':
+                        case 'price-low':
                             return a.price - b.price;
+                        case 'price-high':
+                            return b.price - a.price;
                         case 'medium':
                             return a.medium.localeCompare(b.medium);
                         default: // 'id'
