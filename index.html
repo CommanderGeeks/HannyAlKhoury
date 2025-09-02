@@ -361,8 +361,10 @@
 
         .artworks-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .artwork-card {
@@ -380,7 +382,7 @@
 
         .artwork-image {
             width: 100%;
-            height: 250px;
+            height: 350px;
             background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
             display: flex;
             align-items: center;
@@ -398,19 +400,19 @@
         }
 
         .artwork-info {
-            padding: 1.5rem;
+            padding: 1.5rem 2rem;
         }
 
         .artwork-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
             color: var(--text-light);
         }
 
         .artwork-details {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--text-gray);
-            line-height: 1.6;
+            line-height: 1.8;
         }
 
         .artwork-details span {
@@ -941,6 +943,7 @@
                     <div class="artwork-image">
                         <img src="${imagePath.replace(/ /g, '%20')}" 
                              alt="${artwork.name}" 
+                             onerror="this.style.display='none'">
                     </div>
                     <div class="artwork-info">
                         <h4 class="artwork-title">${artwork.name}</h4>
@@ -978,7 +981,7 @@
             document.getElementById('detailYear').textContent = artwork.year;
             document.getElementById('detailMedium').textContent = artwork.medium;
             document.getElementById('detailDimensions').textContent = `${artwork.length} × ${artwork.width}`;
-            document.getElementById('detailPrice').textContent = `$${artwork.price.toLocaleString()} USD`;
+            document.getElementById('detailPrice').textContent = `${artwork.price.toLocaleString('en-US')} USD`;
             document.getElementById('detailCollection').textContent = collectionTitle;
             
             overlay.style.display = 'block';
